@@ -1,4 +1,3 @@
-import pytest
 import os
 import tempfile
 from src.api import HHAPI
