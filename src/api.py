@@ -1,6 +1,7 @@
 """
 Модуль для работы с API HH.ru
 """
+
 from abc import ABC, abstractmethod
 import requests
 from typing import List, Dict, Any
@@ -55,7 +56,7 @@ class HHAPI(AbstractAPI):
         params = {
             "text": keyword,  # Ключевое слово для поиска
             "per_page": per_page,  # Сколько вакансий получить
-            "area": 113  # Код России
+            "area": 113,  # Код России
         }
 
         # Отправляем запрос на API HH.ru

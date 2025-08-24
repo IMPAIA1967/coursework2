@@ -6,7 +6,6 @@ from src.vacancy import Vacancy
 from src.storage import JSONStorage
 
 
-
 def test_vacancy_creation():
     """Проверяем, что вакансия создаётся и превращается в словарь."""
     v = Vacancy("Python dev", "http://test.com", 100000, "Опыт 1 год")
@@ -15,10 +14,9 @@ def test_vacancy_creation():
     assert v.to_dict()["url"] == "http://test.com"
 
 
-
 def test_storage_add_and_get():
     """Проверяем добавление и чтение одной вакансии."""
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as tmp:
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmp:
         tmp_path = tmp.name
 
     storage = JSONStorage(tmp_path)
@@ -34,7 +32,7 @@ def test_storage_add_and_get():
 
 def test_storage_no_duplicates():
     """Одинаковые URL не должны дублироваться."""
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as tmp:
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmp:
         tmp_path = tmp.name
 
     storage = JSONStorage(tmp_path)
@@ -50,7 +48,7 @@ def test_storage_no_duplicates():
 
 def test_storage_delete():
     """Проверяем удаление по URL."""
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as tmp:
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmp:
         tmp_path = tmp.name
 
     storage = JSONStorage(tmp_path)

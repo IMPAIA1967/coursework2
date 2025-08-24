@@ -1,6 +1,7 @@
 """
 Модуль для работы с JSON-файлом.
 """
+
 from abc import ABC, abstractmethod
 import json
 import os
@@ -45,13 +46,13 @@ class JSONStorage(AbstractStorage):
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         # Создаем файл если его нет
         if not os.path.exists(filename):
-            with open(filename, 'w', encoding='utf-8') as f:
+            with open(filename, "w", encoding="utf-8") as f:
                 json.dump([], f)
 
     def get_vacancies(self) -> List[Vacancy]:
         """Читает все вакансии из файла."""
         try:
-            with open(self.__filename, 'r', encoding='utf-8') as f:
+            with open(self.__filename, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
             # Создаем список для результатов
@@ -123,5 +124,5 @@ class JSONStorage(AbstractStorage):
             data.append(vacancy.to_dict())
 
         # Записываем в файл
-        with open(self.__filename, 'w', encoding='utf-8') as f:
+        with open(self.__filename, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)

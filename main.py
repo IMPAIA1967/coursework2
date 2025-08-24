@@ -1,6 +1,7 @@
 """
 Главный файл программы - точка входа.
 """
+
 from src.api import HHAPI
 from src.vacancy import Vacancy
 from src.storage import JSONStorage
@@ -12,16 +13,16 @@ def main():
     storage = JSONStorage()
 
     while True:
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("ПАРСЕР ВАКАНСИЙ HH.RU")
-        print("="*50)
+        print("=" * 50)
         print("1. Поиск и сохранение вакансий")
         print("2. Показать все сохраненные вакансии")
         print("3. Топ-N вакансий по зарплате")
         print("4. Поиск по ключевому слову в описании")
         print("5. Удалить вакансию")
         print("0. Выход")
-        print("="*50)
+        print("=" * 50)
 
         choice = input("Выберите действие (0-5): ").strip()
 
@@ -60,16 +61,17 @@ def search_vacancies(api: HHAPI, storage: JSONStorage):
         for item in vacancies_data:
             # Обрабатываем зарплату
             salary = None
-            if item.get('salary'):
-                salary_data = item['salary']
-                salary = salary_data.get('from')
+            if item.get("salary"):
+                salary_data = item["salary"]
+                salary = salary_data.get("from")
 
             # Создаем объект Vacancy
             vacancy = Vacancy(
-                title=item.get('name', 'Без названия'),
-                url=item.get('alternate_url', ''),
+                title=item.get("name", "Без названия"),
+                url=item.get("alternate_url", ""),
                 salary=salary if salary is not None else 0,
-                description=item.get('snippet', {}).get('requirement', '') or 'Нет описания'
+                description=item.get("snippet", {}).get("requirement", "")
+                or "Нет описания",
             )
 
             # Сохраняем вакансию
@@ -113,7 +115,9 @@ def show_top_vacancies(storage: JSONStorage):
                 vacancies_with_salary.append(vacancy)
 
         # Сортируем по зарплате (от большей к меньшей)
-        sorted_vacancies = sorted(vacancies_with_salary, key=lambda v: v.salary, reverse=True)
+        sorted_vacancies = sorted(
+            vacancies_with_salary, key=lambda v: v.salary, reverse=True
+        )
 
         # Берем первые N вакансий
         top_vacancies = sorted_vacancies[:n]

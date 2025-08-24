@@ -30,7 +30,7 @@ class Vacancy:
             "title": self.title,
             "url": self.url,
             "salary": self.salary,
-            "description": self.description
+            "description": self.description,
         }
 
     @classmethod
@@ -40,7 +40,7 @@ class Vacancy:
             title=data["title"],
             url=data["url"],
             salary=data["salary"],
-            description=data["description"]
+            description=data["description"],
         )
 
     def __str__(self) -> str:
